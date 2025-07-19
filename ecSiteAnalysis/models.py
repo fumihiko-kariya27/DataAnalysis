@@ -1,0 +1,4 @@
+# マイグレーション対象のクラスを定義する
+
+from ecSiteAnalysis.infrastructure.customer.repository.CustomerModel import CustomerModel
+from ecSiteAnalysis.infrastructure.prefecture.repository.PrefectureModel import PrefectureModel

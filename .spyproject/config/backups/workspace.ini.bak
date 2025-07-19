@@ -1,0 +1,12 @@
+[workspace]
+restore_data_on_startup = True
+save_data_on_exit = True
+save_history = True
+save_non_project_files = False
+project_type = 'empty-project-type'
+recent_files = ['ecSiteAnalysis/domain/customer/CustomerRepository.py', 'ecSiteAnalysis/infrastructure/customer/repository/CustomerRepositoryImpl.py', 'ecSiteAnalysis/infrastructure/prefecture/repository/PrefectureModel.py', 'ecSiteAnalysis/models.py', 'ecSiteAnalysis/infrastructure/customer/repository/CustomerModel.py', 'ecSiteAnalysis/domain/customer/Customer.py', 'ecSiteAnalysis/domain/customer/CustomerID.py', 'ecSiteAnalysis/usecase/CustomerAnalysis.py', 'ecSiteAnalysis/presentation/CustomerView.py', 'config/urls.py', 'config/settings.py', 'ecSiteAnalysis/urls.py']
+
+[main]
+version = 0.2.0
+recent_files = []
+
