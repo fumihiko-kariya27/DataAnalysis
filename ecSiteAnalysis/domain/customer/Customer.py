@@ -17,7 +17,7 @@ class Customer:
             return self.getId() == other.get_id();
         return NotImplemented;
     
-    
+     
     def __str__(self):
         return f"ID:{self._id.get_id()}、 氏名：{self._name}"
     
