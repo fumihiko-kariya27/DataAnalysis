@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 
 from ecSiteAnalysis.usecase.CustomerAnalysis import CustomerAnalysis
 
-class CustomerView(View):
+class CustomerListView(View):
     
     def __init__(self):
         self._customer_service = CustomerAnalysis()
@@ -15,3 +15,4 @@ class CustomerView(View):
             "customers": all_customers    
         }
         return TemplateResponse(request, 'customer/list.html', context);
+    

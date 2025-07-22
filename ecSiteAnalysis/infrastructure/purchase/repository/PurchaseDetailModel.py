@@ -1,7 +1,7 @@
 from django.db import models
 
 from ecSiteAnalysis.infrastructure.item.repository.ItemModel import ItemModel
-from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseSummary import PurchaseSummaryModel
+from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseSummaryModel import PurchaseSummaryModel
 
 class PurchaseDetailModel(models.Model):
     
