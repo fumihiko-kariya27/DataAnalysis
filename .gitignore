@@ -1,2 +1,3 @@
 businessData/
-*.pyc
+**/*.pyc
+**/.DS_store
