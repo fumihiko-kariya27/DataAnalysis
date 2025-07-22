@@ -33,3 +33,13 @@ class PurchaseSummary:
     
     def get_quantity(self) -> int:
         return self._quantity;
+    
+    
+    def to_dict(self):
+        return {
+            "name" : self.get_name(),
+            "payment_date" : self.get_payment_date(),
+            "item_name" : self.get_item_name(),
+            "item_price" : self.get_item_price(),
+            "quantity" : self.get_quantity()
+        }
