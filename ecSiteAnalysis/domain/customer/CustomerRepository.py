@@ -1,8 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class CustomerRepository(ABC):
-    
-    @abstractmethod
-    def get_all() -> list:
-        # 顧客一覧を取得する
-        pass
+    pass;

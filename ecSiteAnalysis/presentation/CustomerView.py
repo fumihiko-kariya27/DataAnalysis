@@ -10,9 +10,5 @@ class CustomerListView(View):
     
     
     def get(self, request, *args, **kwargs):
-        all_customers = self._customer_service.get_all();
-        context = {
-            "customers": all_customers    
-        }
-        return TemplateResponse(request, 'customer/list.html', context);
+        pass;
     

@@ -6,15 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        row.addEventListener("mouseenter", () => {
+        row.addEventListener("mouseenter", (event) => {
             row.style.backgroundcolor = "#f0f8ff";
         });
 
-        row.addEventListener("mouseleave", () => {
+        row.addEventListener("mouseleave", (event) => {
             row.style.backgroundcolor = "";
         });
 
-        row.addEventListener("click", () => {
+        row.addEventListener("click", (event) => {
             alert("購入者：" + row.cells[0].innerText + "\n商品名：" + row.cells[2].innerText + "\n数量　：" + row.cells[4].innerText);
         });
     })

@@ -4,6 +4,8 @@ from django.db.models import Prefetch
 
 from ecSiteAnalysis.domain.purchase.PurchaseRepository import PurchaseRepository
 from ecSiteAnalysis.domain.purchase.PurchaseSummary import PurchaseSummary
+from ecSiteAnalysis.domain.customer.Customer import Customer
+from ecSiteAnalysis.domain.customer.CustomerID import CustomerID
 from ecSiteAnalysis.domain.item.Item import Item;
 from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseSummaryModel import PurchaseSummaryModel
 from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseDetailModel import PurchaseDetailModel
@@ -22,11 +24,12 @@ class PurchaseRepositoryImpl(PurchaseRepository):
     
     
     def _to_domain_object(self, model: PurchaseSummaryModel) -> PurchaseSummary:
-        name = model.customer_id.name if model.customer_id else "unknown";
+        customer_model = model.customer_id;
+        customer = Customer(CustomerID(customer_model.id), customer_model.name, customer_model.registration_datetime, customer_model.sex, customer_model.age, customer_model.prefecture);
         payment_datetime = model.payment_datetime;
         details = model.purchasedetailmodel_set.all();
         detail = details[0];
         item_model = detail.item_id;
         item = Item(item_model.id, item_model.name, item_model.price);
         quantity = detail.quantity;
-        return PurchaseSummary(name, payment_datetime, item, quantity);
+        return PurchaseSummary(customer, payment_datetime, item, quantity);

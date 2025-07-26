@@ -13,5 +13,5 @@ class PurchaseAnalysis:
     
     def get_payment_date_between(self, from_day: date, to_day: date) -> list[PurchaseSummary]:
         df_purchase = pd.DataFrame([purchase.to_dict() for purchase in self._repository.get_payment_date_between(from_day, to_day)]);
-        print(df_purchase.isnull().sum())
+        print(df_purchase.describe());
         return self._repository.get_payment_date_between(from_day, to_day);

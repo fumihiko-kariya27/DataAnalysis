@@ -1,11 +1,12 @@
 from datetime import datetime
 
+from ecSiteAnalysis.domain.customer.Customer import Customer
 from ecSiteAnalysis.domain.item.Item import Item
 
 class PurchaseSummary:
     
-    def __init__(self, name: str, payment_datetime: datetime, item: Item, quantity: int):
-        self._name = name;
+    def __init__(self, customer: Customer, payment_datetime: datetime, item: Item, quantity: int):
+        self._customer = customer;
         self._payment_datetime = payment_datetime;
         self._item = item;
         self._quantity = quantity;
@@ -16,7 +17,7 @@ class PurchaseSummary:
     
     
     def get_name(self) -> str:
-        return self._name;
+        return self._customer.get_name();
     
     
     def get_payment_date(self) -> str:
