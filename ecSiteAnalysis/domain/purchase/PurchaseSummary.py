@@ -20,8 +20,8 @@ class PurchaseSummary:
         return self._customer.get_name();
     
     
-    def get_payment_date(self) -> str:
-        return self._payment_datetime.strftime("%Y/%m/%d")
+    def get_payment_datetime(self) -> datetime:
+        return self._payment_datetime;
     
     
     def get_item_name(self) -> str:
@@ -39,7 +39,7 @@ class PurchaseSummary:
     def to_dict(self):
         return {
             "name" : self.get_name(),
-            "payment_date" : self.get_payment_date(),
+            "payment_datetime" : self.get_payment_datetime(),
             "item_name" : self.get_item_name(),
             "item_price" : self.get_item_price(),
             "quantity" : self.get_quantity()

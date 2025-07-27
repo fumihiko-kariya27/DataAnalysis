@@ -12,7 +12,36 @@ from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseDetailModel impor
 
 class PurchaseRepositoryImpl(PurchaseRepository):
     
+    def get_all(self) -> list[PurchaseSummary]:
+        """購入明細を全て取得する
+
+        Returns
+        -------
+        list[PurchaseSummary]
+            全期間の購入明細
+
+        """
+        query_set = PurchaseSummaryModel.objects.all();
+        return [self._to_domain_object(row) for row in query_set];
+        
+    
+    
     def get_payment_date_between(self, from_day: date, to_day: date) -> list[PurchaseSummary]:
+        """取り込み指定期間内の購入明細を取得する
+
+        Parameters
+        ----------
+        from_day : date
+            取り込み開始日
+        to_day : date
+            取り込み終了日
+
+        Returns
+        -------
+        list[PurchaseSummary]
+            取り込み期間内の購入明細一覧
+
+        """
         query_set = PurchaseSummaryModel.objects.prefetch_related(
             Prefetch(
                 "purchasedetailmodel_set",

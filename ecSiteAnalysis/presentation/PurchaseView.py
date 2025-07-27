@@ -13,6 +13,16 @@ class PurchaseView(View):
     def get(self, request, *args, **kwargs):
         if request.GET.get("from_day") is not None and request.GET.get("to_day") is not None:
             return self._get_between(request, args, kwargs)
+        else:
+            return self._get_all(request, args, kwargs);
+    
+    
+    def _get_all(self, request, *args, **kwargs):
+        purchase_detail = self._service.get_all();
+        context = {
+            "purchase_detail": purchase_detail,    
+        }
+        return TemplateResponse(request, "customer/purchase_detail.html", context);
     
     
     def _get_between(self, request, *args, **kwargs):

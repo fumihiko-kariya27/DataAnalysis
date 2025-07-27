@@ -30,7 +30,7 @@ class Customer:
         return self._name;
     
     
-    def get_registration_datetime(self):
+    def get_registration_date(self):
         return self._registration_datetime.strftime("%Y年%m月%d日");
     
     

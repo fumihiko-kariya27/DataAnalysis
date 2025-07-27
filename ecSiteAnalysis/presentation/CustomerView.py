@@ -1,5 +1,4 @@
 from django.views import View
-from django.template.response import TemplateResponse
 
 from ecSiteAnalysis.usecase.CustomerAnalysis import CustomerAnalysis
 
