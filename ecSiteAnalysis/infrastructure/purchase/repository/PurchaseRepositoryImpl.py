@@ -23,11 +23,46 @@ class PurchaseRepositoryImpl(PurchaseRepository):
         """
         query_set = PurchaseSummaryModel.objects.all();
         return [self._to_domain_object(row) for row in query_set];
-        
+    
+    
+    def get_payment_date_from(self, from_day: date) -> list[PurchaseSummary]:
+        """購入日が取り込み開始日以降の購入明細を取得する
+
+        Parameters
+        ----------
+        from_day : date
+            取り込み開始日
+
+        Returns
+        -------
+        list[PurchaseSummary]
+            購入日が取り込み開始日以降の購入明細一覧
+
+        """
+        query_set = PurchaseSummaryModel.objects.filter(payment_datetime__gte=from_day);
+        return [self._to_domain_object(row) for row in query_set];
+    
+    
+    def get_payment_date_to(self, to_day: date) -> list[PurchaseSummary]:
+        """購入日が取り込み終了日以前の購入明細を取得する
+
+        Parameters
+        ----------
+        to_day : date
+            取り込み終了日
+
+        Returns
+        -------
+        list[PurchaseSummary]
+            購入日が取り込み終了日以前の購入明細一覧
+
+        """
+        query_set = PurchaseSummaryModel.objects.filter(payment_datetime__lte=to_day);
+        return [self._to_domain_object(row) for row in query_set];
     
     
     def get_payment_date_between(self, from_day: date, to_day: date) -> list[PurchaseSummary]:
-        """取り込み指定期間内の購入明細を取得する
+        """購入日が取り込み指定期間内の購入明細を取得する
 
         Parameters
         ----------
@@ -48,7 +83,6 @@ class PurchaseRepositoryImpl(PurchaseRepository):
                 queryset = PurchaseDetailModel.objects.select_related("item_id")
             )
         ).filter(payment_datetime__gte=from_day, payment_datetime__lte=to_day);
-        
         return [self._to_domain_object(row) for row in query_set];
     
     
