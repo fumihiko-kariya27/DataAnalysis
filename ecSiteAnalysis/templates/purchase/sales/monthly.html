@@ -2,6 +2,10 @@
 {% load static humanize %}
 {% block title %}商品毎の月間購入金額{% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script src="{% static 'js/sales_chart.js' %}" defer></script>
+{% endblock %}
 {% block content %}
 <h2>月別・商品別 売上集計</h2>
 <table>
@@ -20,4 +24,7 @@
   </tr>
   {% endfor %}
 </table>
+<canvas id="salesChart" width="800" height="400"></canvas>
+{{ month_list|json_script:"months" }}
+{{ sales_monthly|json_script:"item_sales_monthly" }}
 {% endblock %}

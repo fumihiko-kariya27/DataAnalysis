@@ -1,3 +1,5 @@
+import json
+
 from django.views import View
 from django.template.response import TemplateResponse
 
@@ -41,7 +43,7 @@ class PurchaseView(View):
                 month_value.append(summary);
             context = {
                 "month_list": months,
-                "sales_monthly": month_value,    
+                "sales_monthly": month_value,
             }
             return TemplateResponse(request, "purchase/sales/monthly.html", context);
         
