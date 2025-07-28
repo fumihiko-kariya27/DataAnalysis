@@ -10,14 +10,14 @@
 <h2>月別・商品別 売上集計</h2>
 <table>
   <tr>
-    <th>商品名</th>
+    <th>商品名(表示/非表示)</th>
     {% for month in month_list %}
       <th>{{ month }}</th>
     {% endfor %}
   </tr>
   {% for item_sales_monthly in sales_monthly %}
   <tr>
-    <td>{{ item_sales_monthly.item }}</td>
+    <td>{{ item_sales_monthly.item }}<input type="checkbox" value={{ item_sales_monthly.item }} class="is_visible" checked></td>
     {% for month_value in item_sales_monthly.month_value %}
       <td>{{ month_value|intcomma }} 円</td>
     {% endfor %}

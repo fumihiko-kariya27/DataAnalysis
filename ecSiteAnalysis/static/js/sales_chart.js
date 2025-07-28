@@ -1,5 +1,8 @@
 'use strict'
 
+let chart;
+
+// 売上合計のグラフを表示させる
 document.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.querySelector("#salesChart");
     if(!canvas){
@@ -18,38 +21,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }));
 
     const ctx = canvas.getContext("2d");
-    new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: monthList,
-        datasets: dataset
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: "月別商品売上推移"
-            },
-            tooltip: {
-                callbacks: {
-                    label: context => {
-                        const value = context.parsed.y || 0;
-                        return context.dataset.label + ": " + value.toLocaleString() + " 円";
+    chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: monthList,
+            datasets: dataset
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "月別商品売上推移"
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const value = context.parsed.y || 0;
+                            return context.dataset.label + ": " + value.toLocaleString() + " 円";
+                        }
                     }
+                },
+                legend: {
+                    position: "bottom"
                 }
             },
-            legend: {
-                position: "bottom"
-            }
-        },
-        scales: {
-            y: {
-                ticks: {
-                    callback: value => value.toLocaleString() + " 円"
+            scales: {
+                y: {
+                    ticks: {
+                        callback: value => value.toLocaleString() + " 円"
+                    }
                 }
             }
         }
-    }
-  });
+    });
+});
+
+// 商品名の表示・非表示ボタンの状態によって、グラフに当該商品データの表示・非表示を切り替える
+document.addEventListener("DOMContentLoaded", (event) => {
+    const isVisibleCheckBox = document.querySelectorAll(".is_visible");
+    isVisibleCheckBox.forEach(checkBox => {
+        checkBox.addEventListener("change", (event) => {
+            const itemName = event.target.value;
+            const isChecked = event.target.checked;
+
+            const dataset = chart.data.datasets.find(ds => ds.label === itemName);
+            if(dataset){
+                dataset.hidden = !isChecked;
+                chart.update();
+            }
+        });
+    });
 });
