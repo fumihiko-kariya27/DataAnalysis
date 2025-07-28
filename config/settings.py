@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # ECサイトのデータ分析アプリケーション
     "ecSiteAnalysis",
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

@@ -20,6 +20,8 @@
     <td>{{ customer.get_age }}</td>
     <td>{{ customer.get_pref }}</td>
   </tr>
+  {% empty %}
+  <div><p>該当する購入明細はありません</p></div>
   {% endfor %}
 </table>
 {% endblock %}

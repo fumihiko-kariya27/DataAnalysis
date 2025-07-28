@@ -1,7 +1,6 @@
 from datetime import date
 
 import pandas as pd
-from pandas.api.types import is_datetime64_any_dtype
 
 from ecSiteAnalysis.domain.purchase.PurchaseSummary import PurchaseSummary
 from ecSiteAnalysis.infrastructure.purchase.repository.PurchaseRepositoryImpl import PurchaseRepositoryImpl
@@ -41,12 +40,32 @@ class PurchaseAnalysis:
         else:
             # 開始日も終了日も指定されていない場合は全期間の購入明細を取得する
             purchases = self._repository.get_all();
-        
-        df_purchase = pd.DataFrame([purchase.to_dict() for purchase in purchases]);
-        if is_datetime64_any_dtype(df_purchase["payment_datetime"]):
-            df_purchase["payment_datetime"] = pd.to_datetime(df_purchase["payment_datetime"]);
-        df_purchase["payment_month"] = df_purchase["payment_datetime"].dt.strftime("%Y%m");
         return purchases;
+    
+    
+    def get_monthly_sales(self, from_day: date, to_day: date) -> dict[tuple[str, str], int]:
+        """指定取り込み期間内の購入明細から、月間売上を算出する
+        集約単位は月単位/商品単位で売上を計算したデータが返却される
+
+        Parameters
+        ----------
+        from_day : date
+            取り込み開始日
+        to_day : date
+            取り込み終了日
+
+        Returns
+        -------
+        dict[tuple[str, str], int]
+            取り込み期間内の月毎・商品毎の売上データ
+            辞書のkeyであるtupleの第一要素に月名、第二要素に商品名、valueに合計金額が設定される
+        """
+        purchase_detail = self.get_purchase(from_day, to_day);
+        df_purchase = pd.DataFrame([purchase.to_dict() for purchase in purchase_detail]);
+        df_purchase["payment_month"] = df_purchase["payment_datetime"].dt.strftime("%Y/%m");
+        group_by_monthly = df_purchase.groupby(["payment_month", "item_name"])["item_price"].sum();
+        return group_by_monthly.to_dict();
+        
         
         
         
